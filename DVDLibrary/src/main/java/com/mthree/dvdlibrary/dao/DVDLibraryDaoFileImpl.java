@@ -25,10 +25,21 @@ import java.util.Collection;
  */
 public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
-    public static final String DVD_FILE = "DVD.txt";
+    
+    
+    DVDLibraryDaoFileImpl(String textFile)
+        {
+            DVD_FILE = textFile;
+        }
+    public static String DVD_FILE;
     public static final String DELIMITER = "::";
 
     private Map<String, DVD> DVDLibrary = new HashMap<>();
+
+    public DVDLibraryDaoFileImpl()
+        {
+        
+        }
 
     @Override
     public DVD addDVD(DVD d) throws DVDLibraryDaoException {
