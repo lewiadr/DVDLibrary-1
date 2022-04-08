@@ -5,6 +5,7 @@
 package com.mthree.dvdlibrary.dao;
 
 import java.io.FileWriter;
+import java.util.List;
 
 import com.mthree.dvdlibrary.dto.DVD;
 import org.junit.jupiter.api.AfterEach;
@@ -83,6 +84,31 @@ public class DVDLibraryDaoFileImplTest {
 
     @Test
     public void testAddGetAllDVDs() throws Exception {
+        //Create first DVD
+        DVD dvd1 = new DVD("Movie 1");
+        dvd1.setUserRating("5/5");
+        dvd1.setStudio("Test");
+        dvd1.setRating("PG-13");
+        dvd1.setReleaseDate("2022");
+        dvd1.setDirectorName("Billy Bob");
+
+        //Create 2nd DVD
+        DVD dvd2 = new DVD("Movie 2");
+        dvd2.setUserRating("Terrible");
+        dvd2.setStudio("none");
+        dvd2.setRating("PG-13");
+        dvd2.setReleaseDate("2023");
+        dvd2.setDirectorName("Joe");
+
+        // Add both our DVDs to the DAO
+        testDao.addDVD(dvd1);
+        testDao.addDVD(dvd2);
+
+        List<DVD> allDVDs = testDao.listDVDs();
+
+        // First check the general contents of the list
+        assertNotNull(allDVDs);
+        assertEquals(2, allDVDs.size());
 
     }
 
@@ -99,6 +125,6 @@ public class DVDLibraryDaoFileImplTest {
         //  Add the student to the DAO
         testDao.addDVD(dvd);
         testDao.removeDVD(title);
-        assertEquals(testDao.listDVDs(), 0, "Testing DVD Removal");
+        assertEquals(testDao.listDVDs().size(), 0, "Testing DVD Removal");
     }
 }
