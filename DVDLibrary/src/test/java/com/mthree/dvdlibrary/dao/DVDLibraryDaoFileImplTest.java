@@ -88,6 +88,17 @@ public class DVDLibraryDaoFileImplTest {
 
     @Test
     public void testRemoveDVD() throws  Exception {
+        String title = "Movie1";
+        DVD dvd = new DVD(title);
+        dvd.setUserRating("5/5");
+        dvd.setStudio("Test");
+        dvd.setRating("PG-13");
+        dvd.setReleaseDate("2022");
+        dvd.setDirectorName("Billy Bob");
 
+        //  Add the student to the DAO
+        testDao.addDVD(dvd);
+        testDao.removeDVD(title);
+        assertEquals(testDao.listDVDs(), 0, "Testing DVD Removal");
     }
 }
